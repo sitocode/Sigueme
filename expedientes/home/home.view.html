@@ -1,0 +1,15 @@
+﻿
+<div>
+<select ng-model="selectedConv" ng-change="cambio()">
+<option ng-repeat="x in vm.allConvocatorias" value="{{x.IDCONVOCATORIA}}">{{x.CODIGO}}</option>
+</select>
+</div>
+
+<h3>Expedientes:</h3>
+<ul>
+    <li ng-repeat="pf in vm.allExpedientes">
+      {{pf.CODIGOMINISTERIO}} - {{pf.TITULO}} - {{pf.ESTADO}} 
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><a href="#!/login" class="btn btn-primary">Logout</a></p>

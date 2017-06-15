@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body >
+<div  ng-app="myApp" ng-controller="expedientesCtrl" >
+<div ng-repeat="x in exp">{{ x.titulo }}</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('expedientesCtrl', function($scope, $http) {
+    $http.get("/expedientes/1")
+    .then(function (response) {    
+    $scope.exp = response.data.expedientes;
+    });
+});
+</script>
+</body>
+</html>

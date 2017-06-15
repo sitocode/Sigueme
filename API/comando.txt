@@ -1,0 +1,6 @@
+ERROR ( message:Faltan atributos necesarios en el nuevo objeto application. No se puede agregar una entrada de colecci¢n duplicada de tipo 'application' con atributos de clave combinada 'fullPath, arguments' respectivamente establecidos en 'c:\inetpub\wwwroot\sigueme\api\env\scripts\python.exe, c:\inetpub\wwwroot\sigueme\api\env\lib\site-packages\wfastcgi.py'
+. )
+ERROR ( message:Faltan atributos necesarios en el nuevo objeto application. No se puede agregar una entrada de colecci¢n duplicada de tipo 'application' con atributos de clave combinada 'fullPath, arguments' respectivamente establecidos en 'c:\inetpub\wwwroot\sigueme\api\env\scripts\python.exe, c:\inetpub\wwwroot\sigueme\api\env\lib\site-packages\wfastcgi.py'
+. )
+Cambios de configuraci¢n aplicados a la secci¢n "system.webServer/fastCgi" para "MACHINE/WEBROOT/APPHOST" en la ruta de acceso de confirmaci¢n de configuraci¢n "MACHINE/WEBROOT/APPHOST"
+"c:\inetpub\wwwroot\sigueme\api\env\scripts\python.exe|c:\inetpub\wwwroot\sigueme\api\env\lib\site-packages\wfastcgi.py" can now be used as a FastCGI script processor
