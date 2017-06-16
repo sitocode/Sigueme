@@ -5,12 +5,16 @@
         .module('app')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['ProcessFileService', 'ConvocatoriaService', '$rootScope'];
+    HomeController.$inject = ['ProcessFileService', 'ConvocatoriaService', 'NgTableParams','$rootScope'];
 
-    function HomeController(ProcessFileService, ConvocatoriaService, $rootScope) {
+    function HomeController(ProcessFileService, ConvocatoriaService, NgTableParams, $rootScope) {
         var vm = this;
         vm.allExpedientes = [];
         vm.allConvocatorias = [];
+        vm.tableParams = new NgTableParams({}, {
+         dataset: this.allExpedientes
+        });
+
         initController();
 
         $rootScope.cambio = function() {
