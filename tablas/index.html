@@ -1,1 +1,206 @@
+<html >
 
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/x-icon" href="https://production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+  <link rel="mask-icon" type="" href="https://production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+  <title>CodePen - Loading data - External array</title>
+
+
+
+  <link rel='stylesheet prefetch' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://unpkg.com/ng-table/bundles/ng-table.min.css'>
+<style>
+.pipe {
+  display: inline-block;
+  margin: 0 5px;
+  color: #ccc;
+}
+.pipe:before {
+  content: "|";
+}
+
+/*
+** loading-container */
+.loading-container {
+            position: relative;
+        }
+
+        .loading-container .loading:before, .loading-container .loading:after {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            min-height: 50px;
+            min-width: 50px;
+        }
+
+        .loading-container .loading:before {
+            background-color: white;
+            opacity: 0.5;
+        }
+
+/*
+** bootstrap callouts */
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+.bs-callout code {
+    border-radius: 3px;
+}
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+.bs-callout-default {
+    border-left-color: #777;
+}
+.bs-callout-default h4 {
+    color: #777;
+}
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+.bs-callout-info {
+    border-left-color: #1b809e;
+}
+.bs-callout-info h4 {
+    color: #1b809e;
+}
+</style>
+
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+
+
+<body>
+
+
+
+<div ng-app="myApp">
+  <div ng-controller="demoController as demo">
+    <table ng-table="demo.tableParams" class="table table-bordered table-striped table-condensed">
+      <tr ng-repeat="row in $data track by row.CODIGOMINISTERIO">
+        <td data-title="'CODIGOMINISTERIO'" filter="{CODIGOMINISTERIO: 'text'}" sortable="'CODIGOMINISTERIO'" >{{row.CODIGOMINISTERIO}}</td>
+        <td data-title="'TITULO'" >{{row.TITULO}}</td>
+        <td data-title="'ESTADO'">{{row.ESTADO}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<script src="//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-resource.min.js'></script>
+<script>
+angular.module("ngTableDemos", []);
+
+(function() {
+  "use strict";
+
+  angular.module("ngTableDemos").directive("loadingContainer", function() {
+    return {
+      restrict: "A",
+      scope: false,
+      link: function(scope, element, attrs) {
+        var loadingLayer = angular.element("<div class='loading'></div>");
+        element.append(loadingLayer);
+        element.addClass("loading-container");
+        scope.$watch(attrs.loadingContainer, function(value) {
+          loadingLayer.toggleClass("ng-hide", !value);
+        });
+      }
+    };
+  })
+})();
+
+
+
+(function() {
+  "use strict";
+
+  angular.module("ngTableDemos").controller("testDataController", testDataController);
+
+  testDataController.$inject = ["ngTableDemoCountries"];
+  function testDataController(ngTableDemoCountries){
+    this.ngTableDemoCountries = ngTableDemoCountries;
+    this.page = 1;
+    this.pageSize = 10;
+  }
+})();
+</script>
+<script src='https://unpkg.com/ng-table/bundles/ng-table.min.js'></script>
+
+<script>
+
+    var app = angular.module("myApp", ["ngTable", "ngResource"]);
+(function() {
+
+
+  app.controller("demoController", demoController);
+  demoController.$inject = ["NgTableParams", "$resource", "$http"];
+
+  function demoController(NgTableParams, $resource, $http) {
+    // tip: to debug, open chrome dev tools and uncomment the following line
+    debugger;
+
+
+    this.tableParams = new NgTableParams({}, {
+      getData: function(params) {
+        return $http.get('/sigueme/API/expedientes/5').then(function(res){
+          params.total(res.data.inlineCount);
+          return res.data.expedientes;
+        });
+
+      }
+    });
+  }
+})();
+  //# sourceURL=pen.js
+
+  </script>
+
+
+
+
+</body>
+</html>

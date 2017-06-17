@@ -11,9 +11,6 @@
         var vm = this;
         vm.allExpedientes = [];
         vm.allConvocatorias = [];
-        vm.tableParams = new NgTableParams({}, {
-         dataset: this.allExpedientes
-        });
 
         initController();
 
