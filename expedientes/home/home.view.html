@@ -16,7 +16,7 @@
 
     <table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped">
       <tr ng-repeat="row in $data">
-        <td data-title="'IDMINISTERIO'" filter="{IDMINISTERIO: 'text'}" sortable="'IDMINISTERIO'">{{row.CODIGOMINISTERIO}}</td>
+        <td data-title="'IDMINISTERIO'" filter="{CODIGOMINISTERIO: 'text'}" sortable="'CODIGOMINISTERIO'">{{row.CODIGOMINISTERIO}}</td>
         <td data-title="'TITULO'" filter="{TITULO: 'text'}" sortable="'TITULO'">{{row.TITULO}}</td>
         <td data-title="'ESTADO'" filter="{ESTADO: 'text'}" sortable="'ESTADO'">{{row.ESTADO}}</td>
       </tr>

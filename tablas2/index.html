@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Sort and Filter a Table Using Angular</title>
+
+
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+  <div class="container" ng-app="sortApp" ng-controller="mainController">
+
+  <div class="alert alert-info">
+    <p>Sort Type: {{ sortType }}</p>
+    <p>Sort Reverse: {{ sortReverse }}</p>
+    <p>Search Query: {{ searchTITULO }}</p>
+  </div>
+
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search da TITULO" ng-model="searchTITULO">
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-bordered table-striped">
+
+    <thead>
+      <tr>
+        <td>
+          <a href="#" ng-click="sortType = 'CODIGOMINISTERIO'; sortReverse = !sortReverse">
+            CODIGOMINISTERIO
+            <span ng-show="sortType == 'CODIGOMINISTERIO' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'CODIGOMINISTERIO' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'TITULO'; sortReverse = !sortReverse">
+          TITULO
+            <span ng-show="sortType == 'TITULO' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'TITULO' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'ESTADO'; sortReverse = !sortReverse">
+          ESTADO
+            <span ng-show="sortType == 'ESTADO' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'ESTADO' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="row in sushi | orderBy:sortType:sortReverse | filter:searchTITULO">
+        <td>{{ row.CODIGOMINISTERIO }}</td>
+        <td>{{ row.TITULO }}</td>
+        <td>{{ row.ESTADO }}</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+
+</div>
+<script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="//code.angularjs.org/1.6.0/angular.min.js"></script>
+<script src="//code.angularjs.org/1.6.0/angular-route.min.js"></script>
+<script src="//code.angularjs.org/1.6.0/angular-cookies.min.js"></script>
+
+    <script src="js/index.js"></script>
+
+</body>
+</html>
