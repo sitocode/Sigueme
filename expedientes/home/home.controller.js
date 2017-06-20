@@ -14,24 +14,23 @@
 
         initController();
 
+
         $rootScope.cambio = function() {
           ProcessFileService.GetAll(this.selectedConv)
               .then(function (expedientes) {vm.allExpedientes = expedientes.expedientes;});
         };
 
+        $http.get('/sigueme/API/expedientes/5').then(function(res){
+         $rootScope.prueba= JSON.parse(res.data.expedientes);
+       });
 
-        var data = [{CODIGOMINISTERIO: "Moroni", TITULO: "Moroni",ESTADO: "Moroni"},{CODIGOMINISTERIO: "Moroni2", TITULO: "Moroni2",ESTADO: "Moroni2"}];
+
+        //var data = [{"CODIGOMINISTERIO": "Moroni", "TITULO": "Moroni","ESTADO": "Moroni"},{"CODIGOMINISTERIO": "Moroni2", "TITULO": "Moroni2","ESTADO": "Moroni2"}];
+
+        var data= $rootScope.prueba;
 
         this.tableParams = new NgTableParams({}, {
-          dataset: data,
-          getData: function(params) {
-            return $http.get('/sigueme/API/expedientes/5').then(function(res){
-              params.total(res.data.inlineCount);
-              return res.data.expedientes;
-            });
-
-          }
-
+          dataset: data
         });
 
 

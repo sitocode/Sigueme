@@ -5,11 +5,9 @@ angular.module('sortApp', [])
   $scope.sortReverse  = false;  // set the default sort order
   $scope.searchTITULO   = '';     // set the default search/filter term
 
-  // create the list of sushi rolls
 
-  $scope.sushi=$http.get('/sigueme/API/expedientes/5').then(function(res){
-    //params.total(res.data.inlineCount);
-    return res.data.expedientes;
+   $http.get('/sigueme/API/expedientes/1').then(function(res){
+    $scope.sushi= res.data.expedientes;
   });
 
 /*
