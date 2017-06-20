@@ -7,22 +7,8 @@
 
 <h3>Expedientes:</h3>
 
-<!--ul>
-    <li ng-repeat="pf in vm.allExpedientes">
-      {{pf.CODIGOMINISTERIO}} - {{pf.TITULO}} - {{pf.ESTADO}}
-    </li>
-</ul-->
 
-
-    <table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped">
-      <tr ng-repeat="row in $data">
-        <td data-title="'IDMINISTERIO'" filter="{CODIGOMINISTERIO: 'text'}" sortable="'CODIGOMINISTERIO'">{{row.CODIGOMINISTERIO}}</td>
-        <td data-title="'TITULO'" filter="{TITULO: 'text'}" sortable="'TITULO'">{{row.TITULO}}</td>
-        <td data-title="'ESTADO'" filter="{ESTADO: 'text'}" sortable="'ESTADO'">{{row.ESTADO}}</td>
-      </tr>
-    </table>
-
-
+<div id="grid1" ui-grid="gridOptions" class="grid"></div>
 
 <p>&nbsp;</p>
 <p><a href="#!/login" class="btn btn-primary">Logout</a></p>

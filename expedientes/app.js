@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies', 'ngTable'])
+        .module('app', ['ngRoute', 'ngCookies', 'ngTouch', 'ui.grid'])
         .config(config)
         .run(run);
 

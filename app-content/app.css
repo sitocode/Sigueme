@@ -1,3 +1,8 @@
 ﻿a {
     cursor: pointer;
 }
+
+
+.header-filtered {
+  color: blue;
+}

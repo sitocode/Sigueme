@@ -13,6 +13,7 @@ db = SQLAlchemy(app)
 
 from model import CONVOCATORIA
 from model import EXPEDIENTE_SEGUIMIENTO
+from model import CENTROS_TITULO
 
 convocatoria_fields = {
     'IDCONVOCATORIA':   fields.Integer,
@@ -21,13 +22,23 @@ convocatoria_fields = {
     'ESTADO': fields.String,
 }
 
+
+centros_fields = {
+    'IDCENTRO': fields.String,
+    'CENTRO':     fields.String,
+}
+
+
 expediente_fields = {
     'IDCONVOCATORIA':   fields.Integer,
     'IDTITULO': fields.Integer,
     'CODIGOMINISTERIO':     fields.String,
+    'UNIVERSIDAD':     fields.String,
     'TITULO': fields.String,
     'ESTADO': fields.String,
+    'CENTROS':fields.List(fields.Nested(centros_fields)),
 }
+
 
 parser = reqparse.RequestParser()
 parser.add_argument('task')

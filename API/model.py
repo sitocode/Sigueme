@@ -24,11 +24,13 @@ class EXPEDIENTE_SEGUIMIENTO(db.Model):
     CODIGOMINISTERIO = db.Column(db.String(20))
     TITULO = db.Column(db.String(255))
     ESTADO = db.Column(db.String(60))
+    UNIVERSIDAD = db.Column(db.String(70))
+    CENTROS = db.relationship('CENTROS_TITULO', foreign_keys=[IDTITULO], primaryjoin='CENTROS_TITULO.IDTITULO == EXPEDIENTE_SEGUIMIENTO.IDTITULO')
 
 
-    def __init__(self, IDCONVOCATORIA, IDTITULO, CODIGOMINISTERIO, TITULO, ESTADO):
-        self.IDCONVOCATORIA = IDCONVOCATORIA
-        self.IDTITULO = IDTITULO
-        self.CODIGOMINISTERIO = CODIGOMINISTERIO
-        self.TITULO = TITULO
-        self.ESTADO = ESTADO
+
+class CENTROS_TITULO(db.Model):
+    __tablename__ = 'TITULOS_CENTROS_DESC'
+    IDCENTRO = db.Column(db.String(8), primary_key=True)
+    IDTITULO = db.Column(db.Integer)
+    CENTRO = db.Column(db.String(1000))
