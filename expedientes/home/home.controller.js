@@ -20,6 +20,7 @@
               .then(function (expedientes) {vm.allExpedientes = expedientes.expedientes;});
         };
 
+<<<<<<< HEAD
         $rootScope.cambio = function() {
           ProcessFileService.GetAll(this.selectedConv)
               .then(function (expedientes) {$rootScope.gridOptions.data= expedientes.expedientes;});
@@ -77,6 +78,20 @@
 
 
 
+=======
+        $http.get('/sigueme/API/expedientes/5').then(function(res){
+         $rootScope.prueba= JSON.parse(res.data.expedientes);
+       });
+
+
+        //var data = [{"CODIGOMINISTERIO": "Moroni", "TITULO": "Moroni","ESTADO": "Moroni"},{"CODIGOMINISTERIO": "Moroni2", "TITULO": "Moroni2","ESTADO": "Moroni2"}];
+
+        var data= $rootScope.prueba;
+
+        this.tableParams = new NgTableParams({}, {
+          dataset: data
+        });
+>>>>>>> 97f0465e2d7dae486087b2109d2da3e0098ba505
 
 
         function initController() {
