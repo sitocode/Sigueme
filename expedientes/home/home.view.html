@@ -3,29 +3,11 @@
 <select ng-model="selectedConv" ng-change="cambio()">
 <option ng-repeat="x in vm.allConvocatorias" value="{{x.IDCONVOCATORIA}}">{{x.CODIGO}}</option>
 </select>
+<img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+
+<h3>Expedientes</h3>
+<div id="grid1" ui-grid="gridOptions" class="grid">
 </div>
 
-<h3>Expedientes:</h3>
-<<<<<<< HEAD
-=======
-<div>{{prueba}}</div>
-<!--ul>
-    <li ng-repeat="pf in vm.allExpedientes">
-      {{pf.CODIGOMINISTERIO}} - {{pf.TITULO}} - {{pf.ESTADO}}
-    </li>
-</ul-->
-
-    <table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped">
-      <tr ng-repeat="row in $data">
-        <td data-title="'IDMINISTERIO'" filter="{CODIGOMINISTERIO: 'text'}" sortable="'CODIGOMINISTERIO'">{{row.CODIGOMINISTERIO}}</td>
-        <td data-title="'TITULO'" filter="{TITULO: 'text'}" sortable="'TITULO'">{{row.TITULO}}</td>
-        <td data-title="'ESTADO'" filter="{ESTADO: 'text'}" sortable="'ESTADO'">{{row.ESTADO}}</td>
-      </tr>
-    </table>
->>>>>>> 97f0465e2d7dae486087b2109d2da3e0098ba505
-
-
-<div id="grid1" ui-grid="gridOptions" class="grid"></div>
-
-<p>&nbsp;</p>
-<p><a href="#!/login" class="btn btn-primary">Logout</a></p>
+</div>

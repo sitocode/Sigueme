@@ -5,39 +5,14 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Table, Column, Integer, String, Date, Float
 from sqlalchemy.sql import select
 
-
 app = Flask(__name__)
 api = Api(app)
 app.config.from_object(os.environ['APP_SETTINGS'])
 db = SQLAlchemy(app)
 
-from model import CONVOCATORIA
-from model import EXPEDIENTE_SEGUIMIENTO
-from model import CENTROS_TITULO
-
-convocatoria_fields = {
-    'IDCONVOCATORIA':   fields.Integer,
-    'CONVOCATORIA': fields.String,
-    'CODIGO':     fields.String,
-    'ESTADO': fields.String,
-}
+from model import *
 
 
-centros_fields = {
-    'IDCENTRO': fields.String,
-    'CENTRO':     fields.String,
-}
-
-
-expediente_fields = {
-    'IDCONVOCATORIA':   fields.Integer,
-    'IDTITULO': fields.Integer,
-    'CODIGOMINISTERIO':     fields.String,
-    'UNIVERSIDAD':     fields.String,
-    'TITULO': fields.String,
-    'ESTADO': fields.String,
-    'CENTROS':fields.List(fields.Nested(centros_fields)),
-}
 
 
 parser = reqparse.RequestParser()
@@ -58,12 +33,15 @@ class expedientesList(Resource):
     def get(self, idconvocatoria):
         return {'expedientes': [marshal(expediente, expediente_fields) for expediente in EXPEDIENTE_SEGUIMIENTO.query.filter_by(IDCONVOCATORIA=idconvocatoria)]}
 
-
+class centrosList(Resource):
+    def get(self, id):
+        return {'centros': [marshal(centro, centro_fields) for centro in CENTROS_TITULO.query.filter_by(IDTITULO=id)]}
 
 ############ Api resource routing#############################
 api.add_resource(expedientesList, '/sigueme/API/expedientes/<idconvocatoria>')
 api.add_resource(expediente, '/sigueme/API/expedientes/<idconvocatoria>/<id>')
 api.add_resource(convocatoriasList, '/sigueme/API/convocatorias')
+api.add_resource(centrosList, '/sigueme/API/centros/<id>')
 
 
 

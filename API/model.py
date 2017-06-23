@@ -1,4 +1,31 @@
 from app import db
+from app import fields
+
+
+
+convocatoria_fields = {
+    'IDCONVOCATORIA':   fields.Integer,
+    'CONVOCATORIA': fields.String,
+    'CODIGO':     fields.String,
+    'ESTADO': fields.String,
+}
+
+
+centro_fields = {
+    'IDCENTRO': fields.String,
+    'CENTRO':     fields.String,
+}
+
+
+expediente_fields = {
+    'IDCONVOCATORIA':   fields.Integer,
+    'IDTITULO': fields.Integer,
+    'CODIGOMINISTERIO':     fields.String,
+    'UNIVERSIDAD':     fields.String,
+    'TITULO': fields.String,
+    'ESTADO': fields.String,
+    'CENTROS':fields.List(fields.Nested(centro_fields)),
+}
 
 
 
@@ -8,12 +35,6 @@ class CONVOCATORIA(db.Model):
     CONVOCATORIA = db.Column(db.String(100))
     CODIGO = db.Column(db.String(25))
     ESTADO = db.Column(db.String(2))
-
-    def __init__(self, IDCONVOCATORIA,CONVOCATORIA,CODIGO,ESTADO):
-        self.IDCONVOCATORIA = IDCONVOCATORIA
-        self.CONVOCATORIA = CONVOCATORIA
-        self.CODIGO = CODIGO
-        self.ESTADO = ESTADO
 
 
 
@@ -25,12 +46,14 @@ class EXPEDIENTE_SEGUIMIENTO(db.Model):
     TITULO = db.Column(db.String(255))
     ESTADO = db.Column(db.String(60))
     UNIVERSIDAD = db.Column(db.String(70))
-    CENTROS = db.relationship('CENTROS_TITULO', foreign_keys=[IDTITULO], primaryjoin='CENTROS_TITULO.IDTITULO == EXPEDIENTE_SEGUIMIENTO.IDTITULO')
+    CENTROS = db.relationship('CENTROS_TITULO',
+    primaryjoin='EXPEDIENTE_SEGUIMIENTO.IDTITULO == CENTROS_TITULO.IDTITULO',
+    backref='EXPEDIENTE_SEGUIMIENTO' , lazy='joined')
 
 
 
 class CENTROS_TITULO(db.Model):
     __tablename__ = 'TITULOS_CENTROS_DESC'
     IDCENTRO = db.Column(db.String(8), primary_key=True)
-    IDTITULO = db.Column(db.Integer)
+    IDTITULO = db.Column(db.Integer, db.ForeignKey(EXPEDIENTE_SEGUIMIENTO.IDTITULO), primary_key=True)
     CENTRO = db.Column(db.String(1000))
