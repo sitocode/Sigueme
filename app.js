@@ -15,12 +15,6 @@
                 controllerAs: 'vm'
             })
 
-            .when('/expedientes', {
-                controller: 'ExpedientesController',
-                templateUrl: 'expedientes/expedientes.view.html',
-                controllerAs: 'vm'
-            })
-
             .when('/login', {
                 controller: 'LoginController',
                 templateUrl: 'login/login.view.html',
